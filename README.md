@@ -3,7 +3,7 @@
 
 ## Description
 
-MNO Service API is the API that deals with uploading files on the AWS and getting them through two different endpoints.
+File Service API is the API that deals with uploading files on the AWS and getting them through two different endpoints.
 
 ## Technologies Used
 
