@@ -45,7 +45,13 @@ Start the service:
 sh run.sh
 ```
 
-OR
+OR Run these commands:
+
+* Apply alembic migrations
+```bash
+alembic upgrade head
+```
+
 ```bash
 uvicorn app.app:app --port 5000
 ```

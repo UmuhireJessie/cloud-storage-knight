@@ -3,21 +3,25 @@ import boto3
 from botocore.exceptions import NoCredentialsError
 from typing import Generator
 from app.db.session import SessionLocal
+from pathlib import Path
+import shutil
+import os
 
 def upload_to_aws(file, filename):
     s3 = boto3.client('s3', aws_access_key_id=settings.ACCESS_KEY,
                       aws_secret_access_key=settings.SECRET_KEY)
 
     local_file_path = settings.LOCAL_FILE_PATH + filename
+    print("local_file_path", local_file_path)
     print(local_file_path)
-    print(file.file.name)
+    print(file.filename)
     destination = Path(local_file_path)
 
     with destination.open("wb") as f:
         shutil.copyfileobj(file.file, f)
 
     try:
-        res = s3.upload_file(destination, settings.BUCKET_NAME, filename)
+        res = s3.upload_file(local_file_path, settings.BUCKET_NAME, filename)
         os.remove(destination)
         print("Upload Successful")
         return (f"{filename} Upload Successful", res)
